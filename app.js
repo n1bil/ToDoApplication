@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import { tasksRoutes } from "./routes/tasksRoutes.js";
 
 const app = express();
-const port = "https://silly-headscarf-ant.cyclic.app";
+const port = 3000;
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));

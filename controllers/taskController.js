@@ -4,7 +4,6 @@ import ToDo from "../models/todoModel.js";
 export async function getTasks(req, res) {
     try {
         const tasks = await ToDo.findOne({});
-        console.log(tasks);
         res.render('index.ejs', tasks);
     } catch (error) {
         console.log(error);

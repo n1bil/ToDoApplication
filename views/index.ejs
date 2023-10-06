@@ -1,0 +1,129 @@
+
+    <%- include('partials/header.ejs') %>
+
+    <body>
+        <header>
+            <nav class="navigation">
+                <div>
+                    <h1 class="title">
+                        <span class="material-symbols-outlined">blur_on</span>
+                        Intelligent TODO List
+                    </h1>
+                </div>
+                <div class="navList">
+                    <ul class="ul-header">
+                        <li>nabil.nadzor@gmail.com</li>
+                        <li>ChangePassword</li>
+                        <li>Logout</li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <div class="others">
+                <div class="search-container">
+                    <form action="#">
+                        <input type="text" placeholder="Search..." class="search-input">
+                        <button type="submit" class="search-button">Search</button>
+                    </form>
+                </div>
+
+                <div class="timeContainer">
+                    <h1 class="time"><%= currentDate %></h1>
+                </div>
+            </div>
+
+            <div class="cards">
+                <div class="redContainer container">
+                    <div class="cardRed card">
+                        <div class="headerRedCard header">To Read</div>
+                        <% if (locals.redTasks) { %>
+                            <% locals.redTasks.forEach(task => { %>
+                            <form action="/delete" method="post">
+                            <div class="item">
+                                <input type="checkbox" class="custom-firstCheckbox">
+                                <p class="pRed"><%= task.name %></p>
+                                <button class="delete-button" name="taskRedId" value="<%= task.id %>"><i class="fas fa-trash"></i></button>
+                            </div>
+                            </form>
+                            <% }); %>
+                        <% } %>
+                    </div>
+                    
+                    <form class="input-container" action="/submit" method="post">
+                        <input id="newTaskInputRed" class="newInputClass" name="taskRed" type="text" placeholder="Add a ToDo">
+                        <button id="addNewTaskRed" class="addButtonClass" type="submit">+</button>
+                    </form>
+                </div>
+
+                <div class="greenContainer container">
+                    <div class="cardGreen card">
+                        <div class="headerGreenCard header">To Watch</div>
+                        <% if (locals.greenTasks) { %>
+                            <% locals.greenTasks.forEach(task => { %>
+                            <form action="/delete" method="post">
+                            <div class="item">
+                                <input type="checkbox" class="custom-secondCheckbox">
+                                <p class="pGreen"><%= task.name %></p>
+                                <button class="delete-button" name="taskGreenId" value="<%= task.id %>"><i class="fas fa-trash"></i></button>
+                            </div>
+                            </form>
+                            <% }); %>
+                        <% } %>
+                    </div>
+                    
+                    <form class="input-container" action="/submit" method="post">
+                        <input id="newTaskInputGreen" class="newInputClass" name="taskGreen" type="text" placeholder="Add a ToDo">
+                        <button id="addNewTaskGreen" class="addButtonClass" type="submit">+</button>
+                    </form>
+                </div>
+
+                <div class="purpleContainer container">
+                    <div class="cardPurple card">
+                        <div class="headerPurpleCard header">To Buy</div>
+                        <% if (locals.purpleTasks) { %>
+                            <% locals.purpleTasks.forEach(task => { %>
+                            <form action="/delete" method="post">
+                            <div class="item">
+                                <input type="checkbox" class="custom-thirdCheckbox">
+                                <p class="pPurple"><%= task.name %></p>
+                                <button class="delete-button" name="taskPurpleId" value="<%= task.id %>"><i class="fas fa-trash"></i></button>
+                            </div>
+                            </form>
+                            <% }); %>
+                        <% } %>
+                    </div>
+
+                    <form class="input-container" action="/submit" method="post">
+                        <input id="newTaskInputPurple" class="newInputClass" name="taskPurple" type="text" placeholder="Add a ToDo">
+                        <button id="addNewTaskPurple" class="addButtonClass" type="submit">+</button>
+                    </form>
+                </div>
+
+                <div class="blueContainer container">
+                    <div class="cardBlue card">
+                        <div class="headerBlueCard header">To Eat</div>
+                        <% if (locals.blueTasks) { %>
+                            <% locals.blueTasks.forEach(task => { %>
+                            <form action="/delete" method="post">
+                            <div class="item">
+                                <input type="checkbox" class="custom-fourthCheckbox">
+                                <p class="pBlue"><%= task.name %></p>
+                                <button class="delete-button" name="taskBlueId" value="<%= task.id %>"><i class="fas fa-trash"></i></button>
+                            </div>
+                            </form>
+                            <% }); %>
+                        <% } %>
+                    </div>
+
+                    <form class="input-container" action="/submit" method="post">
+                        <input id="newTaskInputBlue" class="newInputClass" name="taskBlue" type="text" placeholder="Add a ToDo">
+                        <button id="addNewTaskBlue" class="addButtonClass" type="submit">+</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <%- include('partials/footer.ejs') %>
+

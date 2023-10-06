@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap");
+
+body {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+}
+
+header {
+    background-color: rgb(86, 97, 105);
+    color: white;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 4%;
+}
+
+.navList {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    width: 40%;
+}
+
+.ul-header {
+    display: flex;
+    align-items: center;
+    gap: 20%;
+    list-style-type: none;
+}
+
+.material-symbols-outlined {
+    font-size: 48px !important;
+    margin-right: 30px;
+  }
+
+.others {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.search-input {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 300px;
+}
+
+.search-button {
+    background-color: rgb(86, 97, 105);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #1b9606;
+}
+
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+    border: 2px solid #ccc;
+}
+
+.newInputClass {
+    padding: 10px;
+    border: none;
+    font-size: 16px;
+    width: 100%;
+    outline: none;
+}
+
+.addButtonClass {
+    background-color: rgb(86, 97, 105);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    height: 30px;
+    font-size: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 5px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.tim {
+    background-color: rgb(86, 97, 105);
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 19%;
+    margin: 1%;
+}
+
+.card {
+    border-radius: 5px;
+}
+
+.header {
+    color: white;
+    padding: 5%;
+    font-size: 1.5rem;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.headerRedCard {
+    background-color: rgb(231, 162, 153);
+}
+
+.headerGreenCard {
+    background-color: rgb(121, 190, 158);
+}
+
+.headerPurpleCard {
+    background-color: rgb(141, 104, 141);
+}
+
+.headerBlueCard {
+    background-color: rgb(113, 172, 221);
+}
+
+p {
+    margin: 0%;
+    padding: 6%;
+    font-size: 1.2rem;
+}
+
+.cardRed {
+    border: 1px solid rgb(231, 162, 153);
+}
+
+.cardGreen {
+    border: 1px solid rgb(121, 190, 158);
+}
+
+.cardPurple {
+    border: 1px solid rgb(141, 104, 141);
+}
+
+.cardBlue {
+    border: 1px solid rgb(113, 172, 221);
+}
+
+.item {
+    display: flex;
+    border: 1px solid rgb(243, 243, 243);
+}
+
+input[type="checkbox"] {
+    margin-left: 7%;
+    color: white;
+    transform: scale(1.2);
+}
+
+.custom-firstCheckbox {
+    accent-color: rgb(231, 162, 153);
+    padding: 10px;
+}
+
+.custom-secondCheckbox {
+    accent-color: rgb(121, 190, 158);
+}
+
+.custom-thirdCheckbox {
+    accent-color: rgb(141, 104, 141);
+}
+
+.custom-fourthCheckbox {
+    accent-color: rgb(113, 172, 221);
+}
+
+input:checked + p {
+    text-decoration: line-through;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.footer-content > p {
+    color: rgb(86, 97, 105);
+    font-weight: 900;
+    padding: 0%;
+}
+
+.delete-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: 20px;
+  }
+  
+  .delete-button i {
+    color: rgb(86, 97, 105);
+    font-size: 24px;
+  }

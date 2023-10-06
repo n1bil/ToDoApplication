@@ -1,48 +1,7 @@
-import express from "express";
-import bodyParser from "body-parser";
-import mongoose from "mongoose";
+import ToDo from "../models/todoModel.js";
 
-const app = express();
-const port = 3000;
 
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// *MongoDB settings
-mongoose.connect("mongodb+srv://admin-nabil:Qpalzm19@todo-project.dmk1hup.mongodb.net/todolistDB", { useNewUrlParser: true });
-
-const todoSchema = new mongoose.Schema({
-    redTasks: [{name: String}],
-    greenTasks: [{name: String}],
-    purpleTasks: [{name: String}],
-    blueTasks: [{name: String}], 
-});
-
-const ToDo = mongoose.model('ToDo', todoSchema);
-
-app.use((req, res, next) => {
-    const months = [
-        "January", "February", "March", "April",
-        "May", "June", "July", "August",
-        "September", "October", "November", "December"
-    ];
-
-    const daysOfWeek = [
-        "Sunday", "Monday", "Tuesday", "Wednesday",
-        "Thursday", "Friday", "Saturday"
-    ];
-
-    const currentDate = new Date();
-    const dayOfWeek = daysOfWeek[currentDate.getDay()];
-    const month = months[currentDate.getMonth()];
-    const day = currentDate.getDate();
-    const year = currentDate.getFullYear();
-    
-    res.locals.currentDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
-    next();
-});
-
-app.get("/", async (req, res) => {
+export async function getTasks(req, res) {
     try {
         const tasks = await ToDo.findOne({});
         console.log(tasks);
@@ -50,9 +9,9 @@ app.get("/", async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-});
+};
 
-app.post("/submit", async (req, res) => {
+export async function addTask(req, res) {
     const taskRed = req.body['taskRed'];
     const taskGreen = req.body['taskGreen'];
     const taskPurple = req.body['taskPurple'];
@@ -87,15 +46,9 @@ app.post("/submit", async (req, res) => {
     } catch (error) {
         console.error(error);
     }
-});
+};
 
-
-
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
-
-app.post("/delete", async (req, res) => {
+export async function deleteTask(req, res) {
     const taskRedId = req.body.taskRedId;
     const taskGreenId = req.body.taskGreenId;
     const taskPurpleId = req.body.taskPurpleId;
@@ -138,60 +91,4 @@ app.post("/delete", async (req, res) => {
     } catch (error) {
         console.error(error);
     }
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-app.use((req, res, next) => {
-    const taskRed = req.body['taskRed'];
-    const taskGreen = req.body['taskGreen'];
-    const taskPurple = req.body['taskPurple'];
-    const taskBlue = req.body['taskBlue'];
-    
-    if (taskRed) {
-        tasks.redTasks.push(taskRed)
-    }
-
-    if (taskGreen) {
-        tasks.greenTasks.push(taskGreen);
-    }
-
-    if (taskPurple) {
-        tasks.purpleTasks.push(taskPurple);
-    }
-
-    if (taskBlue) {
-        tasks.blueTasks.push(taskBlue);
-    }
-
-    next();
-});
-*/
+};

@@ -143,21 +143,6 @@ app.post("/delete", async (req, res) => {
 
 
 
-/*
-app.post("/delete", async (req, res) => {
-    const taskId = req.body.taskId;
-    console.log(taskId);
-    const result = await ToDo.findById({"redTasks._id": taskId});
-    console.log(result);
-})
-*/
-
-
-
-
-
-
-
 
 
 

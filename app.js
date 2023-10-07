@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import { config } from "dotenv";
 import { tasksRoutes } from "./routes/tasksRoutes.js";
+import ejs from 'ejs';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -21,6 +22,7 @@ const connectDB = async () => {
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.set('view engine', 'ejs');
 
 app.use((req, res, next) => {
     const months = [

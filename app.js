@@ -1,15 +1,26 @@
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import { config } from "dotenv";
 import { tasksRoutes } from "./routes/tasksRoutes.js";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+config();
+
+mongoose.set('strictQuery', false);
+const connectDB = async () => {
+    try {
+        const connect = await mongoose.connect(process.env.MONGO_URI);
+        console.log(`MongoDB Connected: ${connect.connection.host}`);
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+}
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
-
-mongoose.connect("mongodb+srv://admin-nabil:Qpalzm19@todo-project.dmk1hup.mongodb.net/todolistDB", { useNewUrlParser: true });
 
 app.use((req, res, next) => {
     const months = [
@@ -35,6 +46,8 @@ app.use((req, res, next) => {
 
 app.use("/", tasksRoutes);
 
-app.listen(process.env.PORT || port, () => {
-    console.log(`Server running on port ${port}`);
-});
+connectDB().then(() => {
+    app.listen(port, () => {
+        console.log(`Server running on port ${port}`);
+    })
+})

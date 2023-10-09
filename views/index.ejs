@@ -40,7 +40,7 @@
                         <div class="headerRedCard header">To Read</div>
                         <% if (locals.redTasks) { %>
                             <% locals.redTasks.forEach(task => { %>
-                            <form action="/delete" method="post">
+                            <form action="/todolist/delete" method="post">
                             <div class="item">
                                 <input type="checkbox" class="custom-firstCheckbox">
                                 <p class="pRed"><%= task.name %></p>
@@ -51,7 +51,7 @@
                         <% } %>
                     </div>
                     
-                    <form class="input-container" action="/submit" method="post">
+                    <form class="input-container" action="/todolist/submit" method="post">
                         <input id="newTaskInputRed" class="newInputClass" name="taskRed" type="text" placeholder="Add a ToDo">
                         <button id="addNewTaskRed" class="addButtonClass" type="submit">+</button>
                     </form>
@@ -62,7 +62,7 @@
                         <div class="headerGreenCard header">To Watch</div>
                         <% if (locals.greenTasks) { %>
                             <% locals.greenTasks.forEach(task => { %>
-                            <form action="/delete" method="post">
+                            <form action="/todolist/delete" method="post">
                             <div class="item">
                                 <input type="checkbox" class="custom-secondCheckbox">
                                 <p class="pGreen"><%= task.name %></p>
@@ -73,7 +73,7 @@
                         <% } %>
                     </div>
                     
-                    <form class="input-container" action="/submit" method="post">
+                    <form class="input-container" action="/todolist/submit" method="post">
                         <input id="newTaskInputGreen" class="newInputClass" name="taskGreen" type="text" placeholder="Add a ToDo">
                         <button id="addNewTaskGreen" class="addButtonClass" type="submit">+</button>
                     </form>
@@ -84,7 +84,7 @@
                         <div class="headerPurpleCard header">To Buy</div>
                         <% if (locals.purpleTasks) { %>
                             <% locals.purpleTasks.forEach(task => { %>
-                            <form action="/delete" method="post">
+                            <form action="/todolist/delete" method="post">
                             <div class="item">
                                 <input type="checkbox" class="custom-thirdCheckbox">
                                 <p class="pPurple"><%= task.name %></p>
@@ -95,7 +95,7 @@
                         <% } %>
                     </div>
 
-                    <form class="input-container" action="/submit" method="post">
+                    <form class="input-container" action="/todolist/submit" method="post">
                         <input id="newTaskInputPurple" class="newInputClass" name="taskPurple" type="text" placeholder="Add a ToDo">
                         <button id="addNewTaskPurple" class="addButtonClass" type="submit">+</button>
                     </form>
@@ -106,7 +106,7 @@
                         <div class="headerBlueCard header">To Eat</div>
                         <% if (locals.blueTasks) { %>
                             <% locals.blueTasks.forEach(task => { %>
-                            <form action="/delete" method="post">
+                            <form action="/todolist/delete" method="post">
                             <div class="item">
                                 <input type="checkbox" class="custom-fourthCheckbox">
                                 <p class="pBlue"><%= task.name %></p>
@@ -117,7 +117,7 @@
                         <% } %>
                     </div>
 
-                    <form class="input-container" action="/submit" method="post">
+                    <form class="input-container" action="/todolist/submit" method="post">
                         <input id="newTaskInputBlue" class="newInputClass" name="taskBlue" type="text" placeholder="Add a ToDo">
                         <button id="addNewTaskBlue" class="addButtonClass" type="submit">+</button>
                     </form>

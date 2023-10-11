@@ -32,16 +32,17 @@ export async function addTask(req, res) {
                 existingToDo.blueTasks.push({ name: taskBlue });
             }
             await existingToDo.save();
-        } else {
-            const newToDo = new ToDo({
-                redTasks: taskRed ? [{ name: taskRed }] : [],
-                greenTasks: taskGreen ? [{ name: taskGreen }] : [],
-                purpleTasks: taskPurple ? [{ name: taskPurple }] : [],
-                blueTasks: taskBlue ? [{ name: taskBlue }] : [],
-            });
-            await newToDo.save();
-        }
-         res.redirect('/');
+        } 
+        // else {
+        //     const newToDo = new ToDo({
+        //         redTasks: taskRed ? [{ name: taskRed }] : [],
+        //         greenTasks: taskGreen ? [{ name: taskGreen }] : [],
+        //         purpleTasks: taskPurple ? [{ name: taskPurple }] : [],
+        //         blueTasks: taskBlue ? [{ name: taskBlue }] : [],
+        //     });
+        //     await newToDo.save();
+        // }
+         res.redirect('/todolist');
     } catch (error) {
         console.error(error);
     }

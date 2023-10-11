@@ -24,17 +24,14 @@ header {
 }
 
 .navList {
-    display: flex;
-    align-items: center;
+    margin-right: 4%;
     font-size: 1.1rem;
-    width: 40%;
 }
-
-.ul-header {
-    display: flex;
-    align-items: center;
-    gap: 20%;
-    list-style-type: none;
+  
+.navList a {
+    color: #fff; /* Цвет текста ссылок */
+    text-decoration: none; /* Убрать подчеркивание у ссылок */
+    margin: 0 30px; /* Отступы между ссылками */
 }
 
 .material-symbols-outlined {

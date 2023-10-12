@@ -11,8 +11,8 @@
                     </h1>
                 </div>
                 <div class="navList">
-                    <a href="/"><%= username %></a>
-                    <a href="/changepassword">Change Password</a>
+                    <a href="/todolist"><%= username %></a>
+                    <a href="/todolist">Change Password</a>
                     <a href="/logout">Logout</a>
                 </div>
             </nav>
@@ -35,7 +35,7 @@
             <div class="cards">
                 <div class="redContainer container">
                     <div class="cardRed card">
-                        <div class="headerRedCard header">To Read</div>
+                        <div class="headerRedCard header">Personal</div>
                         <% if (locals.redTasks) { %>
                             <% locals.redTasks.forEach(task => { %>
                             <form action="/todolist/delete" method="post">
@@ -57,7 +57,7 @@
 
                 <div class="greenContainer container">
                     <div class="cardGreen card">
-                        <div class="headerGreenCard header">To Watch</div>
+                        <div class="headerGreenCard header">Work</div>
                         <% if (locals.greenTasks) { %>
                             <% locals.greenTasks.forEach(task => { %>
                             <form action="/todolist/delete" method="post">
@@ -79,7 +79,7 @@
 
                 <div class="purpleContainer container">
                     <div class="cardPurple card">
-                        <div class="headerPurpleCard header">To Buy</div>
+                        <div class="headerPurpleCard header">Travel</div>
                         <% if (locals.purpleTasks) { %>
                             <% locals.purpleTasks.forEach(task => { %>
                             <form action="/todolist/delete" method="post">
@@ -101,7 +101,7 @@
 
                 <div class="blueContainer container">
                     <div class="cardBlue card">
-                        <div class="headerBlueCard header">To Eat</div>
+                        <div class="headerBlueCard header">Others</div>
                         <% if (locals.blueTasks) { %>
                             <% locals.blueTasks.forEach(task => { %>
                             <form action="/todolist/delete" method="post">

@@ -11,16 +11,16 @@ import { currentDateMiddleware } from "./utils/currentDateMiddleware.js";
 const app = express();
 const port = process.env.PORT || 3000;
 
-// mongoose.set('strictQuery', false);
-// const connectDB = async () => {
-//     try {
-//         const connect = await mongoose.connect(process.env.MONGO_URI);
-//         console.log(`MongoDB Connected: ${connect.connection.host}`);
-//     } catch (error) {
-//         console.log(error);
-//         process.exit(1);
-//     }
-// }
+mongoose.set('strictQuery', false);
+const connectDB = async () => {
+    try {
+        const connect = await mongoose.connect(process.env.MONGO_URI);
+        console.log(`MongoDB Connected: ${connect.connection.host}`);
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+}
 
 
 app.use(express.static('public'));
@@ -32,18 +32,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/todoDB', { useNewUrlParser: true });
+// mongoose.connect('mongodb://127.0.0.1:27017/todoDB', { useNewUrlParser: true });
 
 app.use(currentDateMiddleware);
 app.use("/", tasksRoutes);
 
 
-app.listen(port, () => {
-    console.log(`Server started on port ${port}`);
-});
-
-// connectDB().then(() => {
-//     app.listen(port, () => {
-//         console.log(`Server running on port ${port}`);
-//     })
-// })
+connectDB().then(() => {
+    app.listen(port, () => {
+        console.log(`Server running on port ${port}`);
+    })
+})

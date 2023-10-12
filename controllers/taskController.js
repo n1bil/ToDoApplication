@@ -1,94 +1,54 @@
-import ToDo from "../models/todoModel.js";
+import * as taskService from '../service/taskService.js';
 
 
 export async function getTasks(req, res) {
     try {
-        const tasks = await ToDo.findOne({});
-        res.render('index.ejs', tasks);
+        if (req.isAuthenticated()) {
+            const currentUser = req.user;
+            res.render("index.ejs", currentUser);
+        } else {
+            res.redirect("/login");
+        }
     } catch (error) {
         console.log(error);
     }
-};
+}
 
 export async function addTask(req, res) {
-    const taskRed = req.body['taskRed'];
-    const taskGreen = req.body['taskGreen'];
-    const taskPurple = req.body['taskPurple'];
-    const taskBlue = req.body['taskBlue'];
+    if (req.isAuthenticated()) {
+        const currentUser = req.user;
+        const taskIds = {
+            taskRed: req.body["taskRed"],
+            taskGreen: req.body["taskGreen"],
+            taskPurple: req.body["taskPurple"],
+            taskBlue: req.body["taskBlue"]
+        };
 
-    try {
-        const existingToDo = await ToDo.findOne({});
-        if (existingToDo) {
-            if (taskRed) {
-                existingToDo.redTasks.push({ name: taskRed });
-            }
-            if (taskGreen) {
-                existingToDo.greenTasks.push({ name: taskGreen });
-            }
-            if (taskPurple) {
-                existingToDo.purpleTasks.push({ name: taskPurple });
-            }
-            if (taskBlue) {
-                existingToDo.blueTasks.push({ name: taskBlue });
-            }
-            await existingToDo.save();
-        } 
-        // else {
-        //     const newToDo = new ToDo({
-        //         redTasks: taskRed ? [{ name: taskRed }] : [],
-        //         greenTasks: taskGreen ? [{ name: taskGreen }] : [],
-        //         purpleTasks: taskPurple ? [{ name: taskPurple }] : [],
-        //         blueTasks: taskBlue ? [{ name: taskBlue }] : [],
-        //     });
-        //     await newToDo.save();
-        // }
-         res.redirect('/todolist');
-    } catch (error) {
-        console.error(error);
+        try {
+            await taskService.addTask(currentUser, taskIds);
+            res.redirect('/todolist');
+        } catch (error) {
+            console.error(error);
+        }
     }
-};
+}
+
 
 export async function deleteTask(req, res) {
-    const taskRedId = req.body.taskRedId;
-    const taskGreenId = req.body.taskGreenId;
-    const taskPurpleId = req.body.taskPurpleId;
-    const taskBlueId = req.body.taskBlueId;
+    if (req.isAuthenticated()) {
+        const currentUserId = req.user._id;
+        const taskIds = {
+            taskRedId: req.body.taskRedId,
+            taskGreenId: req.body.taskGreenId,
+            taskPurpleId: req.body.taskPurpleId,
+            taskBlueId: req.body.taskBlueId
+        };
 
-    try {
-        if (taskRedId) {
-        await ToDo.findByIdAndUpdate(
-            { _id: "651fa91c8fc7a17d8d5d8840" },
-            { $pull: { redTasks: { _id: taskRedId } } },
-            { new: true }
-        );
+        try {
+            await taskService.deleteTask(currentUserId, taskIds);
+            res.redirect('/todolist');
+        } catch (error) {
+            console.error(error);
         }
-
-        if (taskGreenId) {
-        await ToDo.findByIdAndUpdate(
-            { _id: "651fa91c8fc7a17d8d5d8840" },
-            { $pull: { greenTasks: { _id: taskGreenId } } },
-            { new: true }
-        );
-        }
-
-        if (taskPurpleId) {
-        await ToDo.findByIdAndUpdate(
-            { _id: "651fa91c8fc7a17d8d5d8840" },
-            { $pull: { purpleTasks: { _id: taskPurpleId } } },
-            { new: true }
-        );
-        }
-
-        if (taskBlueId) {
-        await ToDo.findByIdAndUpdate(
-            { _id: "651fa91c8fc7a17d8d5d8840" },
-            { $pull: { blueTasks: { _id: taskBlueId } } },
-            { new: true }
-        );
-        }
-
-        res.redirect('/');
-    } catch (error) {
-        console.error(error);
     }
-};
+}

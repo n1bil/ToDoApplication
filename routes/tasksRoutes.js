@@ -1,6 +1,7 @@
 import express from "express";
 import { getTasks, addTask, deleteTask } from "../controllers/taskController.js";
-import { login, postLogin, todolist, logout, postRegister, register, start } from "../controllers/authController.js";
+import { login, postLogin, logout, postRegister, register, start } from "../controllers/authController.js";
+
 
 const router = express.Router();
 

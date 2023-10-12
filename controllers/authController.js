@@ -1,5 +1,6 @@
-import ToDo from "../models/todoModel.js";
 import passport from "passport";
+import * as authService from "../service/authService.js";
+
 
 export const start = async (req, res) => {
     res.render("start.ejs");
@@ -30,83 +31,24 @@ export const logout = (req, res) => {
     });
 };
 
-
-export const postRegister = (req, res) => {
-    const newUser = new ToDo({
-        username: req.body.username,
-        password: req.body.password,
-        redTasks: [],
-        greenTasks: [],
-        purpleTasks: [],
-        blueTasks: [],
-    });
-
-    ToDo.register(newUser, req.body.password, (err, user) => {
-            if (err) {
-                console.log(err);
-                req.flash("error", "Регистрация не удалась. Пожалуйста, попробуйте еще раз.");
-                res.redirect("/register");
-            } else {
-                passport.authenticate('local')(req, res, () => {
-                    res.redirect("/todolist");
-                });
-            }
-        }
-    );
-};
-
-export const postLogin = (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
-        if (err) {
-            console.log(err);
-            return next(err);
-        }
-        if (!user) {
-            // Неудачная аутентификация, перенаправление на страницу входа с сообщением об ошибке
-            return res.redirect('/login?error=invalid_credentials');
-        }
-        req.logIn(user, (err) => {
-            if (err) {
-                console.log(err);
-                return next(err);
-            }
-            // Успешная аутентификация, перенаправление на страницу списка дел
-            return res.redirect('/todolist');
+export const postRegister = async (req, res) => {
+    try {
+        await authService.registerUser(req.body);
+        passport.authenticate('local')(req, res, () => {
+            res.redirect("/todolist");
         });
-    })(req, res, next);
+    } catch (err) {
+        console.log(err);
+        res.redirect("/register");
+    }
 };
 
-
-// export const postLogin = async (req, res) => {
-    // const username = req.body.username;
-    // const password = req.body.password;
-
-    // try {
-    //     const user = await ToDo.findOne({ username: username });
-    //     bcrypt.compare(password, user.password, (err, result) => {
-    //         if (result) {
-    //             res.render("index.ejs", user);
-    //         }
-    //     });
-    // } catch (error) {
-    //     console.log(error);
-    // }
-// };
-
-// bcrypt.hash(req.body.password, 5, async (err, hash) => {
-    //     const newUser = new ToDo({
-    //         username: req.body.username,
-    //         password: hash,
-    //         redTasks: [],
-    //         greenTasks: [],
-    //         purpleTasks: [],
-    //         blueTasks: [],
-    //     });
-
-    //     try {
-    //         await newUser.save();
-    //         res.render('index.ejs', newUser);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // });
+export const postLogin = async (req, res, next) => {
+    try {
+        await authService.authenticateUser(req, res, next);
+        res.redirect('/todolist');
+    } catch (err) {
+        console.log(err);
+        res.redirect('/login', { error: req.flash('info') });
+    }
+};

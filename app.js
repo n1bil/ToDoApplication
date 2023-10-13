@@ -11,6 +11,17 @@ import { currentDateMiddleware } from "./utils/currentDateMiddleware.js";
 const app = express();
 const port = process.env.PORT || 3000;
 
+
+
+
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.set('view engine', 'ejs');
+
+app.use(session({ secret: 'Our little secret.', resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 mongoose.set('strictQuery', false);
 const connectDB = async () => {
     try {
@@ -23,17 +34,6 @@ const connectDB = async () => {
 }
 
 
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.set('view engine', 'ejs');
-
-app.use(session({ secret: 'Our little secret.', resave: false, saveUninitialized: false }));
-app.use(passport.initialize());
-app.use(passport.session());
-
-
-// mongoose.connect('mongodb://127.0.0.1:27017/todoDB', { useNewUrlParser: true });
-
 app.use(currentDateMiddleware);
 app.use("/", tasksRoutes);
 
@@ -43,3 +43,5 @@ connectDB().then(() => {
         console.log(`Server running on port ${port}`);
     })
 })
+
+// mongoose.connect('mongodb://127.0.0.1:27017/todoDB', { useNewUrlParser: true });
